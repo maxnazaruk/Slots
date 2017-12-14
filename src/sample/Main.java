@@ -1374,7 +1374,9 @@ public class Main extends Application {
                                 }
                             });
                         }
-                        System.out.println(calculation(buttons, lines, bet));
+
+                        startCash += calculation(buttons, lines, bet);
+                        cash.setText("" + startCash);
                         Thread.sleep(timer * 10);
                         spinButton.setDisable(false);
                         return null;
@@ -1517,15 +1519,13 @@ public class Main extends Application {
         System.out.println(lines + " lines");
         System.out.println(bet + " bet");
 
-//        if (list.get(1).getId().equals("cherry1.png")) {
-//            startCash += 20;
-//            cash.setText("" + startCash);
-//            return "+20";
-//        } else {
-//            return "0";
-//        }
-
-        return Integer.parseInt(win);
+        if (list.get(1).getId().equals("seven1.png")) {
+            startCash += 20;
+            cash.setText("" + startCash);
+            return bet;
+        } else {
+            return -bet*lines;
+        }
     }
 
     public static void main(String[] args) {
