@@ -68,6 +68,15 @@ public class Main extends Application {
     static int linesClicks = 0;
     String cheatWord = "";
     static Boolean jackpot = true;
+    static int jackCherry = 200;
+    static int jackSeven = 400;
+    static int jackDiamond = 100;
+    static int jackLemon = 50;
+    static int jackBAR1 = 50;
+    static int jackBAR2 = 100;
+    String textStyle = "    -fx-font-weight: bold;\n" +
+            "   -fx-font: BOLD 25 arial;\n" +
+            " -fx-fill: #ffffff\n";
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -257,15 +266,57 @@ public class Main extends Application {
         jackPot.setArcHeight(25);
         jackPot.setArcWidth(25);
 
-        ListView<String> list = new ListView<String>();
-        ObservableList<String> items = FXCollections.observableArrayList(
-                "Jackpot List:", "777", "Family App");
-        list.setItems(items);
-        list.setTranslateX(layout1.getWidth() / 4 + 40);
-        list.setTranslateY(layout1.getHeight() / 4 - 410);
-        list.setMaxWidth(300);
-        list.setMaxHeight(300);
-        list.setStyle(".list-cell:favorite {-fx-background-color: #ff0000;}");
+        Text jackPotSeven = new Text();
+        jackPotSeven.setText("" + jackSeven);
+        jackPotSeven.setTranslateY(layout1.getHeight() / 10 - 380);
+        jackPotSeven.setTranslateX(layout1.getHeight() / 4 + 230);
+        jackPotSeven.setStyle(textStyle);
+
+        Image image = new Image(getClass().getResourceAsStream("seven1.png"));
+        Image imageDiamond = new Image(getClass().getResourceAsStream("Diamond.png"));
+        Image imageBar1 = new Image(getClass().getResourceAsStream("BAR1-1.png"));
+        Image imageCherry = new Image(getClass().getResourceAsStream("cherry1.png"));
+        ImageView test = new ImageView(image);
+        test.setFitHeight(45);
+        test.setFitWidth(30);
+        test.setTranslateY(layout1.getHeight() / 10 - 380);
+        test.setTranslateX(layout1.getHeight() / 4 + 15);
+
+        ImageView test1 = new ImageView(image);
+        test1.setFitHeight(45);
+        test1.setFitWidth(30);
+        test1.setTranslateY(layout1.getHeight() / 10 - 380);
+        test1.setTranslateX(layout1.getHeight() / 4 + 45);
+
+        ImageView test2 = new ImageView(image);
+        test2.setFitHeight(45);
+        test2.setFitWidth(30);
+        test2.setTranslateY(layout1.getHeight() / 10 - 380);
+        test2.setTranslateX(layout1.getHeight() / 4 + 75);
+
+        ImageView testcherry1 = new ImageView(imageCherry);
+        testcherry1.setFitHeight(45);
+        testcherry1.setFitWidth(30);
+        testcherry1.setTranslateY(layout1.getHeight() / 10 - 320);
+        testcherry1.setTranslateX(layout1.getHeight() / 4 + 15);
+
+        ImageView testcherry2 = new ImageView(imageCherry);
+        testcherry2.setFitHeight(45);
+        testcherry2.setFitWidth(30);
+        testcherry2.setTranslateY(layout1.getHeight() / 10 - 320);
+        testcherry2.setTranslateX(layout1.getHeight() / 4 + 45);
+
+        ImageView testcherry3 = new ImageView(imageCherry);
+        testcherry3.setFitHeight(45);
+        testcherry3.setFitWidth(30);
+        testcherry3.setTranslateY(layout1.getHeight() / 10 - 320);
+        testcherry3.setTranslateX(layout1.getHeight() / 4 + 75);
+
+        Text jackPotCherry = new Text();
+        jackPotCherry.setText("" + jackCherry);
+        jackPotCherry.setTranslateY(layout1.getHeight() / 10 - 320);
+        jackPotCherry.setTranslateX(layout1.getHeight() / 4 + 230);
+        jackPotCherry.setStyle(textStyle);
 
         Button increaseBet = new Button("˄");
         increaseBet.setTranslateY(-layout1.getHeight() / 4 + 545);
@@ -677,7 +728,7 @@ public class Main extends Application {
                         }
                     };
                     new Thread(task2).start();
-                } else if (cheatWord.equalsIgnoreCase("mmoney")) {
+                } else if (cheatWord.equalsIgnoreCase("mmoney") || cheatWord.equalsIgnoreCase("max")) {
                     startCash = 9999999;
                     cash.setText("" + startCash);
                 }
@@ -1286,7 +1337,6 @@ public class Main extends Application {
 //                    } catch (InterruptedException exc) {
 //                    }
 //                    Platform.runLater(() -> {
-//                        winCash.setText(calculation(buttons));
 //                        if (winCash.getText().startsWith("+")) {
 //                            winCash.setStyle("-fx-fill:green");
 //                            layout1.getChildren().add(winCash);
@@ -1375,7 +1425,32 @@ public class Main extends Application {
                             });
                         }
 
-                        startCash += calculation(buttons, lines, bet);
+                        if(lines == 1) {
+                            System.out.println("lines 1");
+                            startCash += calculation(buttons, lines, bet, 1, 4, 7);
+                            System.out.println(calculation(buttons, lines, bet, 1, 4, 7) + " first line");
+                            winCash.setText("" + calculation(buttons, lines, bet, 1, 4, 7));
+                        }else if(lines == 2){
+                            System.out.println("lines 2");
+                            startCash += calculation(buttons, lines, bet, 1, 4, 7);
+                            System.out.println(calculation(buttons, lines, bet, 1, 4, 7) + " first line");
+                            startCash += calculation(buttons, lines, bet, 0, 3, 6);
+                            System.out.println(calculation(buttons, lines, bet, 0, 3, 6) + " second line");
+                            Integer win2 = calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6);
+                            winCash.setText(win2.toString());
+                        }else if (lines == 3){
+                            System.out.println("lines 3");
+                            startCash += calculation(buttons, lines, bet, 1, 4, 7);
+                            System.out.println(calculation(buttons, lines, bet, 1, 4, 7) + " first line");
+                            startCash += calculation(buttons, lines, bet, 0, 3, 6);
+                            System.out.println(calculation(buttons, lines, bet, 0, 3, 6) + " second line");
+                            startCash += calculation(buttons, lines, bet, 2, 5, 8);
+                            System.out.println(calculation(buttons, lines, bet, 2, 5, 8) + " third line");
+                            Integer win1 = calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6) +
+                                    calculation(buttons, lines, bet, 2, 5, 8);
+                            winCash.setText(win1.toString());
+                        }
+
                         cash.setText("" + startCash);
                         Thread.sleep(timer * 10);
                         spinButton.setDisable(false);
@@ -1384,6 +1459,9 @@ public class Main extends Application {
 
                 };
                 new Thread(task).start();
+                if(!spinButton.isDisabled()) {
+                    layout1.getChildren().add(winCash);
+                }
             }
         });
 
@@ -1503,28 +1581,82 @@ public class Main extends Application {
 
 
         layout1.getChildren().addAll(spinButton, cash, cashWord, start, increaseBet,
-                decreaseBet, betRectangle, betDisplay, jackPot, list, betWord, linesRectangle,
+                decreaseBet, betRectangle, betDisplay, jackPot, betWord, linesRectangle,
                 linesDisplay, linesWord, multipleSign, increaseLines, decreaseLines, polygonLeft, polygonRight, cheats,
-                enterCheats, winCash, winCashRectangle);
+                enterCheats, winCashRectangle, winCash, test, test1, test2, jackPotSeven, testcherry1, testcherry2, testcherry3,
+                jackPotCherry);
 
         scene1.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene1);
         primaryStage.show();
     }
 
-    public static int calculation(List<Button> list, int lines, int bet) {
-
-        String win = "0";
-
-        System.out.println(lines + " lines");
-        System.out.println(bet + " bet");
-
-        if (list.get(1).getId().equals("seven1.png")) {
-            startCash += 20;
-            cash.setText("" + startCash);
+    public static int calculation(List<Button> list, int lines, int bet, int x, int y, int z) {
+       if(list.get(x).getId().equals("seven1.png") && list.get(y).getId().equals("seven1.png") && list.get(z).getId().equals("seven1.png")){
+            return bet*800;
+        } else if(list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("cherry1.png") ||
+                  list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("cherry1.png")) {
+            return bet*2;
+        }else if (list.get(x).getId().equals("cherry1.png") || list.get(y).getId().equals("cherry1.png") || list.get(z).getId().equals("cherry1.png")) {
             return bet;
-        } else {
-            return -bet*lines;
+        } else if (list.get(x).getId().equals("BAR1-1.png") && list.get(y).getId().equals("BAR1-1.png") && list.get(z).getId().equals("BAR1-1.png")){
+            return bet*10;
+        }else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png") && list.get(z).getId().equals("BAR2-1.png")){
+            return bet*20;
+        }else if (list.get(x).getId().equals("BAR3-1.png") && list.get(y).getId().equals("BAR3-1.png") && list.get(z).getId().equals("BAR3-1.png")){
+            return bet*30;
+        }else if (list.get(x).getId().equals("BAR1-1.png") && list.get(y).getId().equals("BAR1-1.png")){
+            return bet*5;
+        }else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png")){
+            return bet*10;
+        }else if (list.get(x).getId().equals("BAR3-1.png") && list.get(y).getId().equals("BAR3-1.png")){
+            return bet*20;
+        }else if (list.get(x).getId().equals("bananas.png") && list.get(y).getId().equals("bananas.png") && list.get(z).getId().equals("bananas.png")){
+            return bet*50;
+        }else if (list.get(x).getId().equals("bell1.png") && list.get(y).getId().equals("bell1.png") && list.get(z).getId().equals("bell1.png")){
+            return bet*100;
+        }else if (list.get(x).getId().equals("corn.png") && list.get(y).getId().equals("corn.png") && list.get(z).getId().equals("corn.png")){
+            return bet*40;
+        }else if (list.get(x).getId().equals("cub.png") && list.get(y).getId().equals("cub.png") && list.get(z).getId().equals("cub.png")){
+            return bet*40;
+        }else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")){
+            return bet*200;
+        }else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png")){
+            return bet*100;
+        }else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")){
+            return bet*50;
+        }else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png")){
+            return bet*25;
+        }else if (list.get(x).getId().equals("leaf.png") && list.get(y).getId().equals("leaf.png") && list.get(z).getId().equals("leaf.png")){
+            return bet*100;
+        }else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("leaf.png")
+                || list.get(z).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(x).getId().equals("leaf.png")
+                || list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("Diamond.png") && list.get(y).getId().equals("leaf.png")){
+            return bet*50;
+        }else if(list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png") && list.get(z).getId().equals("Lemon.png")){
+            return bet*100;
+        }else if(list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png")){
+            return bet*50;
+        }else if(list.get(x).getId().equals("Lemon.png")){
+            return bet*10;
+        }else if(list.get(x).getId().equals("luck.png") && list.get(y).getId().equals("luck.png") && list.get(z).getId().equals("luck.png")){
+            return bet*100;
+        } else  if (list.get(x).getId().equals("cherry1.png")) {
+           return bet;
+       }else if(list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("pinapple.png") && list.get(z).getId().equals("pinapple.png")){
+           return bet*40;
+       }else if(list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("pinapple.png")){
+           return bet*20;
+       }else if(list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("cherry1.png")){
+           return bet*5;
+       }else if(list.get(x).getId().equals("plum.png") && list.get(y).getId().equals("plum.png") && list.get(z).getId().equals("plum.png")){
+           return bet*80;
+       }else if(list.get(x).getId().equals("plum.png") && list.get(y).getId().equals("plum.png")){
+           return bet*30;
+       }else if(list.get(x).getId().equals("win.png") && list.get(y).getId().equals("win.png") && list.get(z).getId().equals("win.png")){
+           return bet*200;
+       } else {
+            return -bet;
         }
     }
 
