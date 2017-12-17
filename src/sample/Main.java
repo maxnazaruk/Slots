@@ -72,8 +72,8 @@ public class Main extends Application {
     static int jackSeven = 400;
     static int jackDiamond = 100;
     static int jackLemon = 50;
-    static int jackBAR1 = 50;
-    static int jackBAR2 = 100;
+    static int jackBAR3 = 25;
+    static int spinCount = 0;
     String textStyle = "    -fx-font-weight: bold;\n" +
             "   -fx-font: BOLD 25 arial;\n" +
             " -fx-fill: #ffffff\n";
@@ -84,13 +84,6 @@ public class Main extends Application {
 
         scene1 = new Scene(layout1, 1300, 900);
         layout1.setStyle("-fx-background:#FFFFFF");
-
-//        images.add("BAR1.png");
-//        images.add("BAR2.png");
-//        images.add("BAR3.png");
-//        images.add("bell.png");
-//        images.add("cherry.png");
-//        images.add("seven.png");
 
         cashImages.add("cash1.png");
         cashImages.add("cash2.png");
@@ -267,56 +260,130 @@ public class Main extends Application {
         jackPot.setArcWidth(25);
 
         Text jackPotSeven = new Text();
-        jackPotSeven.setText("" + jackSeven);
+        jackPotSeven.setText("X " + jackSeven);
         jackPotSeven.setTranslateY(layout1.getHeight() / 10 - 380);
         jackPotSeven.setTranslateX(layout1.getHeight() / 4 + 230);
         jackPotSeven.setStyle(textStyle);
 
         Image image = new Image(getClass().getResourceAsStream("seven1.png"));
         Image imageDiamond = new Image(getClass().getResourceAsStream("Diamond.png"));
-        Image imageBar1 = new Image(getClass().getResourceAsStream("BAR1-1.png"));
+        Image imageBar = new Image(getClass().getResourceAsStream("BAR3-1.png"));
         Image imageCherry = new Image(getClass().getResourceAsStream("cherry1.png"));
+        Image imageLemon = new Image(getClass().getResourceAsStream("Lemon.png"));
+
         ImageView test = new ImageView(image);
-        test.setFitHeight(45);
+        test.setFitHeight(35);
         test.setFitWidth(30);
-        test.setTranslateY(layout1.getHeight() / 10 - 380);
+        test.setTranslateY(layout1.getHeight() / 10 - 390);
         test.setTranslateX(layout1.getHeight() / 4 + 15);
 
         ImageView test1 = new ImageView(image);
-        test1.setFitHeight(45);
+        test1.setFitHeight(35);
         test1.setFitWidth(30);
-        test1.setTranslateY(layout1.getHeight() / 10 - 380);
+        test1.setTranslateY(layout1.getHeight() / 10 - 390);
         test1.setTranslateX(layout1.getHeight() / 4 + 45);
 
         ImageView test2 = new ImageView(image);
-        test2.setFitHeight(45);
+        test2.setFitHeight(35);
         test2.setFitWidth(30);
-        test2.setTranslateY(layout1.getHeight() / 10 - 380);
+        test2.setTranslateY(layout1.getHeight() / 10 - 390);
         test2.setTranslateX(layout1.getHeight() / 4 + 75);
 
         ImageView testcherry1 = new ImageView(imageCherry);
-        testcherry1.setFitHeight(45);
+        testcherry1.setFitHeight(35);
         testcherry1.setFitWidth(30);
-        testcherry1.setTranslateY(layout1.getHeight() / 10 - 320);
+        testcherry1.setTranslateY(layout1.getHeight() / 10 - 330);
         testcherry1.setTranslateX(layout1.getHeight() / 4 + 15);
 
         ImageView testcherry2 = new ImageView(imageCherry);
-        testcherry2.setFitHeight(45);
+        testcherry2.setFitHeight(35);
         testcherry2.setFitWidth(30);
-        testcherry2.setTranslateY(layout1.getHeight() / 10 - 320);
+        testcherry2.setTranslateY(layout1.getHeight() / 10 - 330);
         testcherry2.setTranslateX(layout1.getHeight() / 4 + 45);
 
         ImageView testcherry3 = new ImageView(imageCherry);
-        testcherry3.setFitHeight(45);
+        testcherry3.setFitHeight(35);
         testcherry3.setFitWidth(30);
-        testcherry3.setTranslateY(layout1.getHeight() / 10 - 320);
+        testcherry3.setTranslateY(layout1.getHeight() / 10 - 330);
         testcherry3.setTranslateX(layout1.getHeight() / 4 + 75);
 
         Text jackPotCherry = new Text();
-        jackPotCherry.setText("" + jackCherry);
-        jackPotCherry.setTranslateY(layout1.getHeight() / 10 - 320);
+        jackPotCherry.setText("X " + jackCherry);
+        jackPotCherry.setTranslateY(layout1.getHeight() / 10 - 330);
         jackPotCherry.setTranslateX(layout1.getHeight() / 4 + 230);
         jackPotCherry.setStyle(textStyle);
+
+        ImageView testdiamond1 = new ImageView(imageDiamond);
+        testdiamond1.setFitHeight(35);
+        testdiamond1.setFitWidth(30);
+        testdiamond1.setTranslateY(layout1.getHeight() / 10 - 270);
+        testdiamond1.setTranslateX(layout1.getHeight() / 4 + 15);
+
+        ImageView testdiamond2 = new ImageView(imageDiamond);
+        testdiamond2.setFitHeight(35);
+        testdiamond2.setFitWidth(30);
+        testdiamond2.setTranslateY(layout1.getHeight() / 10 - 270);
+        testdiamond2.setTranslateX(layout1.getHeight() / 4 + 45);
+
+        ImageView testdiamond3 = new ImageView(imageDiamond);
+        testdiamond3.setFitHeight(35);
+        testdiamond3.setFitWidth(30);
+        testdiamond3.setTranslateY(layout1.getHeight() / 10 - 270);
+        testdiamond3.setTranslateX(layout1.getHeight() / 4 + 75);
+
+        Text jackPotDiamond = new Text();
+        jackPotDiamond.setText("X " + jackDiamond);
+        jackPotDiamond.setTranslateY(layout1.getHeight() / 10 - 270);
+        jackPotDiamond.setTranslateX(layout1.getHeight() / 4 + 230);
+        jackPotDiamond.setStyle(textStyle);
+
+        ImageView testLemon = new ImageView(imageLemon);
+        testLemon.setFitHeight(35);
+        testLemon.setFitWidth(30);
+        testLemon.setTranslateY(layout1.getHeight() / 10 - 210);
+        testLemon.setTranslateX(layout1.getHeight() / 4 + 15);
+
+        ImageView testLemon1 = new ImageView(imageLemon);
+        testLemon1.setFitHeight(35);
+        testLemon1.setFitWidth(30);
+        testLemon1.setTranslateY(layout1.getHeight() / 10 - 210);
+        testLemon1.setTranslateX(layout1.getHeight() / 4 + 45);
+
+        ImageView testLemon2 = new ImageView(imageLemon);
+        testLemon2.setFitHeight(35);
+        testLemon2.setFitWidth(30);
+        testLemon2.setTranslateY(layout1.getHeight() / 10 - 210);
+        testLemon2.setTranslateX(layout1.getHeight() / 4 + 75);
+
+        Text jackPotLemon = new Text();
+        jackPotLemon.setText("X " + jackLemon);
+        jackPotLemon.setTranslateY(layout1.getHeight() / 10 - 210);
+        jackPotLemon.setTranslateX(layout1.getHeight() / 4 + 230);
+        jackPotLemon.setStyle(textStyle);
+
+        ImageView testBar = new ImageView(imageBar);
+        testBar.setFitHeight(35);
+        testBar.setFitWidth(30);
+        testBar.setTranslateY(layout1.getHeight() / 10 - 150);
+        testBar.setTranslateX(layout1.getHeight() / 4 + 15);
+
+        ImageView testBar1 = new ImageView(imageBar);
+        testBar1.setFitHeight(35);
+        testBar1.setFitWidth(30);
+        testBar1.setTranslateY(layout1.getHeight() / 10 - 150);
+        testBar1.setTranslateX(layout1.getHeight() / 4 + 45);
+
+        ImageView testBar2 = new ImageView(imageBar);
+        testBar2.setFitHeight(35);
+        testBar2.setFitWidth(30);
+        testBar2.setTranslateY(layout1.getHeight() / 10 - 150);
+        testBar2.setTranslateX(layout1.getHeight() / 4 + 75);
+
+        Text jackPotBar = new Text();
+        jackPotBar.setText("X " + jackBAR3);
+        jackPotBar.setTranslateY(layout1.getHeight() / 10 - 150);
+        jackPotBar.setTranslateX(layout1.getHeight() / 4 + 230);
+        jackPotBar.setStyle(textStyle);
 
         Button increaseBet = new Button("˄");
         increaseBet.setTranslateY(-layout1.getHeight() / 4 + 545);
@@ -1360,6 +1427,7 @@ public class Main extends Application {
                 Task<Void> task = new Task<Void>() {
                     @Override
                     public Void call() throws Exception {
+                        spinCount++;
                         spinButton.setDisable(true);
                         int yValue = 40;
 
@@ -1425,32 +1493,6 @@ public class Main extends Application {
                             });
                         }
 
-                        if(lines == 1) {
-                            System.out.println("lines 1");
-                            startCash += calculation(buttons, lines, bet, 1, 4, 7);
-                            System.out.println(calculation(buttons, lines, bet, 1, 4, 7) + " first line");
-                            winCash.setText("" + calculation(buttons, lines, bet, 1, 4, 7));
-                        }else if(lines == 2){
-                            System.out.println("lines 2");
-                            startCash += calculation(buttons, lines, bet, 1, 4, 7);
-                            System.out.println(calculation(buttons, lines, bet, 1, 4, 7) + " first line");
-                            startCash += calculation(buttons, lines, bet, 0, 3, 6);
-                            System.out.println(calculation(buttons, lines, bet, 0, 3, 6) + " second line");
-                            Integer win2 = calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6);
-                            winCash.setText(win2.toString());
-                        }else if (lines == 3){
-                            System.out.println("lines 3");
-                            startCash += calculation(buttons, lines, bet, 1, 4, 7);
-                            System.out.println(calculation(buttons, lines, bet, 1, 4, 7) + " first line");
-                            startCash += calculation(buttons, lines, bet, 0, 3, 6);
-                            System.out.println(calculation(buttons, lines, bet, 0, 3, 6) + " second line");
-                            startCash += calculation(buttons, lines, bet, 2, 5, 8);
-                            System.out.println(calculation(buttons, lines, bet, 2, 5, 8) + " third line");
-                            Integer win1 = calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6) +
-                                    calculation(buttons, lines, bet, 2, 5, 8);
-                            winCash.setText(win1.toString());
-                        }
-
                         cash.setText("" + startCash);
                         Thread.sleep(timer * 10);
                         spinButton.setDisable(false);
@@ -1461,6 +1503,25 @@ public class Main extends Application {
                 new Thread(task).start();
                 if(!spinButton.isDisabled()) {
                     layout1.getChildren().add(winCash);
+                }
+                if(spinCount == 4){
+                    layout1.getChildren().removeAll(jackPotSeven, jackPotCherry, jackPotDiamond, jackPotLemon, jackPotBar);
+
+                    jackSeven += bet;
+                    jackCherry += bet;
+                    jackLemon += bet;
+                    jackDiamond += bet;
+                    jackBAR3 += bet;
+
+                    jackPotSeven.setText("X " + jackSeven);
+                    jackPotCherry.setText("X " + jackCherry);
+                    jackPotLemon.setText("X " + jackLemon);
+                    jackPotDiamond.setText("X " + jackDiamond);
+                    jackPotBar.setText("X " + jackBAR3);
+
+                    layout1.getChildren().addAll(jackPotSeven, jackPotCherry, jackPotDiamond, jackPotLemon, jackPotBar);
+
+                    spinCount = 0;
                 }
             }
         });
@@ -1584,7 +1645,8 @@ public class Main extends Application {
                 decreaseBet, betRectangle, betDisplay, jackPot, betWord, linesRectangle,
                 linesDisplay, linesWord, multipleSign, increaseLines, decreaseLines, polygonLeft, polygonRight, cheats,
                 enterCheats, winCashRectangle, winCash, test, test1, test2, jackPotSeven, testcherry1, testcherry2, testcherry3,
-                jackPotCherry);
+                jackPotCherry, testdiamond1, testdiamond2, testdiamond3, jackPotDiamond, testLemon, testLemon1, testLemon2, jackPotLemon,
+                testBar, testBar1, testBar2, jackPotBar);
 
         scene1.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         primaryStage.setScene(scene1);
@@ -1593,7 +1655,7 @@ public class Main extends Application {
 
     public static int calculation(List<Button> list, int lines, int bet, int x, int y, int z) {
        if(list.get(x).getId().equals("seven1.png") && list.get(y).getId().equals("seven1.png") && list.get(z).getId().equals("seven1.png")){
-            return bet*800;
+            return bet*800*jackSeven;
         } else if(list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("cherry1.png") ||
                   list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("cherry1.png")) {
             return bet*2;
@@ -1604,7 +1666,7 @@ public class Main extends Application {
         }else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png") && list.get(z).getId().equals("BAR2-1.png")){
             return bet*20;
         }else if (list.get(x).getId().equals("BAR3-1.png") && list.get(y).getId().equals("BAR3-1.png") && list.get(z).getId().equals("BAR3-1.png")){
-            return bet*30;
+            return bet*30*jackBAR3;
         }else if (list.get(x).getId().equals("BAR1-1.png") && list.get(y).getId().equals("BAR1-1.png")){
             return bet*5;
         }else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png")){
@@ -1620,7 +1682,7 @@ public class Main extends Application {
         }else if (list.get(x).getId().equals("cub.png") && list.get(y).getId().equals("cub.png") && list.get(z).getId().equals("cub.png")){
             return bet*40;
         }else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")){
-            return bet*200;
+            return bet*200*jackDiamond;
         }else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png")){
             return bet*100;
         }else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")){
@@ -1634,7 +1696,7 @@ public class Main extends Application {
                 || list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("Diamond.png") && list.get(y).getId().equals("leaf.png")){
             return bet*50;
         }else if(list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png") && list.get(z).getId().equals("Lemon.png")){
-            return bet*100;
+            return bet*100*jackLemon;
         }else if(list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png")){
             return bet*50;
         }else if(list.get(x).getId().equals("Lemon.png")){
@@ -1655,7 +1717,9 @@ public class Main extends Application {
            return bet*30;
        }else if(list.get(x).getId().equals("win.png") && list.get(y).getId().equals("win.png") && list.get(z).getId().equals("win.png")){
            return bet*200;
-       } else {
+       }else if(list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("cherry1.png") && list.get(z).getId().equals("cherry1.png")){
+           return bet*jackCherry;
+       }  else {
             return -bet;
         }
     }
