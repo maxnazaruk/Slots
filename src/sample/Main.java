@@ -818,7 +818,13 @@ public class Main extends Application {
                         "    -fx-font-size: 1.1em;\n" +
                         "   -fx-font: BOLD 22 arial;\n" +
                         " -fx-text-fill: #ffffff\n");
+                winCash.setText("0");
                 layout1.getChildren().remove(winCash);
+                layout1.getChildren().add(winCash);
+
+                cash.setText(startCash - bet + "");
+                layout1.getChildren().remove(cash);
+                layout1.getChildren().add(cash);
             }
         });
 
@@ -1430,7 +1436,6 @@ public class Main extends Application {
                         spinCount++;
                         spinButton.setDisable(true);
                         int yValue = 40;
-
                         for (int i = 0; i < 96; i++) {
 
                             Thread.sleep(timer);
@@ -1493,18 +1498,31 @@ public class Main extends Application {
                             });
                         }
 
-                        cash.setText("" + startCash);
                         Thread.sleep(timer * 10);
                         spinButton.setDisable(false);
+                        if (lines == 1) {
+                            startCash += calculation(buttons, lines, bet, 1, 4, 7);
+                            winCash.setText(calculation(buttons, lines, bet, 1, 4, 7) + "");
+                            layout1.getChildren().addAll(winCash);
+                            cash.setText(startCash + "");
+                        }else if(lines == 2){
+                            startCash += calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6);
+                            winCash.setText(calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6) + "");
+                            layout1.getChildren().add(winCash);
+                        }else if(lines == 3){
+                            startCash += calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6) +
+                                    calculation(buttons, lines, bet, 2, 5, 8);
+                            winCash.setText(calculation(buttons, lines, bet, 1, 4, 7) + calculation(buttons, lines, bet, 0, 3, 6) +
+                                    calculation(buttons, lines, bet, 2, 5, 8) + "");
+                            layout1.getChildren().add(winCash);
+                        }
+
                         return null;
                     }
 
                 };
                 new Thread(task).start();
-                if(!spinButton.isDisabled()) {
-                    layout1.getChildren().add(winCash);
-                }
-                if(spinCount == 4){
+                if (spinCount == 4) {
                     layout1.getChildren().removeAll(jackPotSeven, jackPotCherry, jackPotDiamond, jackPotLemon, jackPotBar);
 
                     jackSeven += bet;
@@ -1644,7 +1662,7 @@ public class Main extends Application {
         layout1.getChildren().addAll(spinButton, cash, cashWord, start, increaseBet,
                 decreaseBet, betRectangle, betDisplay, jackPot, betWord, linesRectangle,
                 linesDisplay, linesWord, multipleSign, increaseLines, decreaseLines, polygonLeft, polygonRight, cheats,
-                enterCheats, winCashRectangle, winCash, test, test1, test2, jackPotSeven, testcherry1, testcherry2, testcherry3,
+                enterCheats, winCashRectangle, test, test1, test2, jackPotSeven, testcherry1, testcherry2, testcherry3,
                 jackPotCherry, testdiamond1, testdiamond2, testdiamond3, jackPotDiamond, testLemon, testLemon1, testLemon2, jackPotLemon,
                 testBar, testBar1, testBar2, jackPotBar);
 
@@ -1654,72 +1672,72 @@ public class Main extends Application {
     }
 
     public static int calculation(List<Button> list, int lines, int bet, int x, int y, int z) {
-       if(list.get(x).getId().equals("seven1.png") && list.get(y).getId().equals("seven1.png") && list.get(z).getId().equals("seven1.png")){
-            return bet*800*jackSeven;
-        } else if(list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("cherry1.png") ||
-                  list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("cherry1.png")) {
-            return bet*2;
-        }else if (list.get(x).getId().equals("cherry1.png") || list.get(y).getId().equals("cherry1.png") || list.get(z).getId().equals("cherry1.png")) {
+        if (list.get(x).getId().equals("seven1.png") && list.get(y).getId().equals("seven1.png") && list.get(z).getId().equals("seven1.png")) {
+            return bet * 800 * jackSeven;
+        } else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("cherry1.png") ||
+                list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("cherry1.png")) {
+            return bet * 2;
+        } else if (list.get(x).getId().equals("cherry1.png") || list.get(y).getId().equals("cherry1.png") || list.get(z).getId().equals("cherry1.png")) {
             return bet;
-        } else if (list.get(x).getId().equals("BAR1-1.png") && list.get(y).getId().equals("BAR1-1.png") && list.get(z).getId().equals("BAR1-1.png")){
-            return bet*10;
-        }else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png") && list.get(z).getId().equals("BAR2-1.png")){
-            return bet*20;
-        }else if (list.get(x).getId().equals("BAR3-1.png") && list.get(y).getId().equals("BAR3-1.png") && list.get(z).getId().equals("BAR3-1.png")){
-            return bet*30*jackBAR3;
-        }else if (list.get(x).getId().equals("BAR1-1.png") && list.get(y).getId().equals("BAR1-1.png")){
-            return bet*5;
-        }else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png")){
-            return bet*10;
-        }else if (list.get(x).getId().equals("BAR3-1.png") && list.get(y).getId().equals("BAR3-1.png")){
-            return bet*20;
-        }else if (list.get(x).getId().equals("bananas.png") && list.get(y).getId().equals("bananas.png") && list.get(z).getId().equals("bananas.png")){
-            return bet*50;
-        }else if (list.get(x).getId().equals("bell1.png") && list.get(y).getId().equals("bell1.png") && list.get(z).getId().equals("bell1.png")){
-            return bet*100;
-        }else if (list.get(x).getId().equals("corn.png") && list.get(y).getId().equals("corn.png") && list.get(z).getId().equals("corn.png")){
-            return bet*40;
-        }else if (list.get(x).getId().equals("cub.png") && list.get(y).getId().equals("cub.png") && list.get(z).getId().equals("cub.png")){
-            return bet*40;
-        }else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")){
-            return bet*200*jackDiamond;
-        }else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png")){
-            return bet*100;
-        }else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")){
-            return bet*50;
-        }else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png")){
-            return bet*25;
-        }else if (list.get(x).getId().equals("leaf.png") && list.get(y).getId().equals("leaf.png") && list.get(z).getId().equals("leaf.png")){
-            return bet*100;
-        }else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("leaf.png")
+        } else if (list.get(x).getId().equals("BAR1-1.png") && list.get(y).getId().equals("BAR1-1.png") && list.get(z).getId().equals("BAR1-1.png")) {
+            return bet * 10;
+        } else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png") && list.get(z).getId().equals("BAR2-1.png")) {
+            return bet * 20;
+        } else if (list.get(x).getId().equals("BAR3-1.png") && list.get(y).getId().equals("BAR3-1.png") && list.get(z).getId().equals("BAR3-1.png")) {
+            return bet * 30 * jackBAR3;
+        } else if (list.get(x).getId().equals("BAR1-1.png") && list.get(y).getId().equals("BAR1-1.png")) {
+            return bet * 5;
+        } else if (list.get(x).getId().equals("BAR2-1.png") && list.get(y).getId().equals("BAR2-1.png")) {
+            return bet * 10;
+        } else if (list.get(x).getId().equals("BAR3-1.png") && list.get(y).getId().equals("BAR3-1.png")) {
+            return bet * 20;
+        } else if (list.get(x).getId().equals("bananas.png") && list.get(y).getId().equals("bananas.png") && list.get(z).getId().equals("bananas.png")) {
+            return bet * 50;
+        } else if (list.get(x).getId().equals("bell1.png") && list.get(y).getId().equals("bell1.png") && list.get(z).getId().equals("bell1.png")) {
+            return bet * 100;
+        } else if (list.get(x).getId().equals("corn.png") && list.get(y).getId().equals("corn.png") && list.get(z).getId().equals("corn.png")) {
+            return bet * 40;
+        } else if (list.get(x).getId().equals("cub.png") && list.get(y).getId().equals("cub.png") && list.get(z).getId().equals("cub.png")) {
+            return bet * 40;
+        } else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")) {
+            return bet * 200 * jackDiamond;
+        } else if (list.get(x).getId().equals("Diamond.png") && list.get(y).getId().equals("Diamond.png")) {
+            return bet * 100;
+        } else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("Diamond.png")) {
+            return bet * 50;
+        } else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png")) {
+            return bet * 25;
+        } else if (list.get(x).getId().equals("leaf.png") && list.get(y).getId().equals("leaf.png") && list.get(z).getId().equals("leaf.png")) {
+            return bet * 100;
+        } else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(z).getId().equals("leaf.png")
                 || list.get(z).getId().equals("cherry1.png") && list.get(y).getId().equals("Diamond.png") && list.get(x).getId().equals("leaf.png")
-                || list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("Diamond.png") && list.get(y).getId().equals("leaf.png")){
-            return bet*50;
-        }else if(list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png") && list.get(z).getId().equals("Lemon.png")){
-            return bet*100*jackLemon;
-        }else if(list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png")){
-            return bet*50;
-        }else if(list.get(x).getId().equals("Lemon.png")){
-            return bet*10;
-        }else if(list.get(x).getId().equals("luck.png") && list.get(y).getId().equals("luck.png") && list.get(z).getId().equals("luck.png")){
-            return bet*100;
-        } else  if (list.get(x).getId().equals("cherry1.png")) {
-           return bet;
-       }else if(list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("pinapple.png") && list.get(z).getId().equals("pinapple.png")){
-           return bet*40;
-       }else if(list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("pinapple.png")){
-           return bet*20;
-       }else if(list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("cherry1.png")){
-           return bet*5;
-       }else if(list.get(x).getId().equals("plum.png") && list.get(y).getId().equals("plum.png") && list.get(z).getId().equals("plum.png")){
-           return bet*80;
-       }else if(list.get(x).getId().equals("plum.png") && list.get(y).getId().equals("plum.png")){
-           return bet*30;
-       }else if(list.get(x).getId().equals("win.png") && list.get(y).getId().equals("win.png") && list.get(z).getId().equals("win.png")){
-           return bet*200;
-       }else if(list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("cherry1.png") && list.get(z).getId().equals("cherry1.png")){
-           return bet*jackCherry;
-       }  else {
+                || list.get(x).getId().equals("cherry1.png") && list.get(z).getId().equals("Diamond.png") && list.get(y).getId().equals("leaf.png")) {
+            return bet * 50;
+        } else if (list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png") && list.get(z).getId().equals("Lemon.png")) {
+            return bet * 100 * jackLemon;
+        } else if (list.get(x).getId().equals("Lemon.png") && list.get(y).getId().equals("Lemon.png")) {
+            return bet * 50;
+        } else if (list.get(x).getId().equals("Lemon.png")) {
+            return bet * 10;
+        } else if (list.get(x).getId().equals("luck.png") && list.get(y).getId().equals("luck.png") && list.get(z).getId().equals("luck.png")) {
+            return bet * 100;
+        } else if (list.get(x).getId().equals("cherry1.png")) {
+            return bet;
+        } else if (list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("pinapple.png") && list.get(z).getId().equals("pinapple.png")) {
+            return bet * 40;
+        } else if (list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("pinapple.png")) {
+            return bet * 20;
+        } else if (list.get(x).getId().equals("pinapple.png") && list.get(y).getId().equals("cherry1.png")) {
+            return bet * 5;
+        } else if (list.get(x).getId().equals("plum.png") && list.get(y).getId().equals("plum.png") && list.get(z).getId().equals("plum.png")) {
+            return bet * 80;
+        } else if (list.get(x).getId().equals("plum.png") && list.get(y).getId().equals("plum.png")) {
+            return bet * 30;
+        } else if (list.get(x).getId().equals("win.png") && list.get(y).getId().equals("win.png") && list.get(z).getId().equals("win.png")) {
+            return bet * 200;
+        } else if (list.get(x).getId().equals("cherry1.png") && list.get(y).getId().equals("cherry1.png") && list.get(z).getId().equals("cherry1.png")) {
+            return bet * jackCherry;
+        } else {
             return -bet;
         }
     }
